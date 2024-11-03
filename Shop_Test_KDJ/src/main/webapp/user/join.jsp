@@ -4,11 +4,26 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Shop</title>
-	<jsp:include page="/layout/meta.jsp" /> <jsp:include page="/layout/link.jsp" />
+	<title>shop - 회원가입</title>
+	<jsp:include page="/layout/meta.jsp" />
+	<jsp:include page="/layout/link.jsp" />
 </head>
 <body>   
+	<%
+		/*
+		- 회원 가입 화면임을 제목 태그로 출력한다. 
+		- 입력 양식 태그를 이용하여, 아래 정보를 입력 받는다. 
+		- 아이디, 비밀번호, 비밀번호 확인, 이름, 성별, 생일, 이메일, 전화번호, 주소 
+		- 각 입력 정보는 아래 규칙에 따라 유효성 검사를 한다. 
+		- 아이디 : 영문자 또는 한글로 시작
+		- 비밀번호 : 영문자, 숫자, 특수문자만 사용하되, 특수문자는 반드시 1개 포함하고 전체 글자수가 6글자 이상
+		- 비밀번호 확인 : 비밀번호와 비밀번호 확인의 값은 일치해야함
+		- 이름 : 한글만 입력
+		- [가입] 버튼을 구현하고 클릭 시, 회원가입 처리(~/user/join_pro.sp)로 입력 정보를 제출하게 한다. 
+		- [취소] 버튼을 구현하고 클릭 시, 이전화면 또는 메인화면으로 이동하게 한다.
+		*/
 	
+	%>
 	<jsp:include page="/layout/header.jsp" />
 	<div class="px-4 py-5 mt-5 text-center">
 		<h1 class="display-5 fw-bold text-body-emphasis">회원 가입</h1>
@@ -16,7 +31,7 @@
 	
 	<!-- 회원 가입 영역 -->
 	<div class="container shop p-5 mb-5" >
-		<form action="join_pro.jsp" name="joinForm" method="post" >
+		<form action="join_pro.jsp" name="joinForm" method="post" id="join-form">
 		
 			<div class="input-group mb-3 row">
 				<label class="input-group-text col-md-4" id="">아이디</label>
@@ -133,7 +148,7 @@
 			
 			<div class="d-grid gap-2 mt-5 mb-5 d-md-flex justify-content-md-between">
 				<a href="javascript: history.back()" class="btn btn-lg btn-secondary">취소</a>
-				<input type="submit" class="btn btn-lg btn-primary" value="가입" />
+				<input type="submit" class="btn btn-lg btn-primary" value="가입" id="join-btn"/>
 			</div>	
 			
 			
@@ -144,6 +159,64 @@
 	
 	<jsp:include page="/layout/footer.jsp" />
 	<jsp:include page="/layout/script.jsp" />
+	<script type="text/javascript">
+		/*
+			유효성 검사 정규 표현식
+		*/  
+		
+		// - 아이디 : 영문자 또는 한글로 시작
+		const regId = /^[a-zA-Z가-힣]{1}[a-zA-Z가-힣0-9]{1,}$/
+		// - 비밀번호 : 영문자, 숫자, 특수문자만 사용하되, 특수문자는 반드시 1개 포함하고 전체 글자수가 6글자 이상
+		const regPw = /^(?=.*[A-Za-z0-9])(?=.*[@$!%*?&]+)[A-Za-z\d@$!%*?&]{6,}$/
+		// - 이름 : 한글만 입력
+		const regName = /^[가-힣]{2,}$/
+		
+		$(function(){
+			// 폼 전송전 체크
+			$("#join-form").submit(function(){
+				console.log("유효성 검사 시작...")
+				
+				const $id = $("input[name=id]")
+				const $pw = $("input[name=pw]")
+				const $pwConfirm = $("input[name=pw_confirm]")
+				const $name = $("input[name=name]")
+				// 아이디 검사
+				if( !regId.test($id.val()) ){
+					alert("아이디는 영문자 또는 한글로 시작해야합니다. \n 또한 숫자 영어 한글만 입력 가능합니다.")
+					$id.focus();
+					return false;
+				}
+				else{
+					console.log("아이디 유효성 확인.")
+				}
+				
+				// 비밀번호 일치 확인
+				if( !regPw.test($pw.val()) ){
+					alert("비밀번호는 영문자, 숫자, 특수문자만 사용하되, \n 특수문자는 반드시 1개 포함하고 최소 6글자 이상 입력하셔야 합니다.")
+					$pw.focus();
+					return false;
+				}
+				else if( $pw.val() != $pwConfirm.val() ){
+					alert("비밀번호가 일치하지 않습니다.")
+					$pw.focus();
+					return false;
+				}
+				else{
+					console.log("비밀번호 유효성 확인.")
+				}
+				// 이름 검사
+				if( !regName.test($name.val()) ){
+					alert("이름은 한글만 입력가능합니다.")
+					$name.focus();
+					return false;
+				}
+				else{
+					console.log("이름 유효성 확인.")
+				}
+				
+			})
+		})
+	</script>
 </body>
 </html>
 

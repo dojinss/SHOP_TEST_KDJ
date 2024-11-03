@@ -6,11 +6,16 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Shop</title>
+	<title>Shop - 마이페이지</title>
 	<jsp:include page="/layout/meta.jsp" /> <jsp:include page="/layout/link.jsp" />
 </head>
 <body>   
-	
+	<%
+		String root = request.getContextPath();
+		UserRepository userDAO = new UserRepository();
+		String loginId = (String) session.getAttribute("loginId");
+		boolean login = !loginId.equals("") && !loginId.isEmpty();
+	%>
 	<jsp:include page="/layout/header.jsp" />
 	
 	<div class="row m-0 mypage">

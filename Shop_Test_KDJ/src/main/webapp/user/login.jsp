@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Shop</title>
+	<title>Shop - 로그인</title>
 	<jsp:include page="/layout/meta.jsp" /> <jsp:include page="/layout/link.jsp" />
 </head>
 <body>   
@@ -23,7 +23,24 @@
 		
 		// 아이디 저장 쿠키 가져오기
 		
+		// 쿠키 변수 생성
+		Cookie[] cookies = request.getCookies();
 		
+		// 쿠키 정보를 담을 변수 선언
+		String rememberId = null;
+		String userId = null;
+		
+		// 쿠키 읽어오기
+		if( cookies != null) {
+			for (Cookie cookie : cookies) {
+				String cookieName = cookie.getName();
+				String cookieValue = URLDecoder.decode( cookie.getValue(), "UTF-8");
+				switch (cookieName) {
+					case "rememberId"	: rememberId = cookieValue;  break;
+					case "userId"		: userId = cookieValue;  break;
+				}
+			}
+		}
 	%>
 	<jsp:include page="/layout/header.jsp" />
 	<div class="px-4 py-5 mt-5 text-center">
@@ -35,7 +52,7 @@
 	  <form action="login_pro.jsp" method="post">
 	    <div class="form-floating">
 	      <input type="text" class="form-control" id="floatingInput" name="id" 
-	      		 value="<%= loginId %>" placeholder="아이디" autofocus>
+	      		 value="<%= userId %>" placeholder="아이디" autofocus>
 	      <label for="floatingInput">아이디</label>
 	    </div>
 	    <div class="form-floating">

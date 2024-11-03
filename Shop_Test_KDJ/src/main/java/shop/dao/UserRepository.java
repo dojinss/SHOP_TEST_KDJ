@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 import shop.dto.PersistentLogin;
-import shop.dto.Product;
 import shop.dto.User;
 
 public class UserRepository extends JDBConnection {
@@ -15,7 +14,32 @@ public class UserRepository extends JDBConnection {
 	 * @return
 	 */
 	public int insert(User user) {
+		int result = 0;
 		
+		String SQL = " INSERT INTO user "
+				   + " ( user_id, password, name, gender, birth, mail, phone, address ) "
+				   + " VALUES ( ?, ?, ?, ?, ?, ?, ?, ?) "
+				   ;
+		
+		try {
+			psmt = con.prepareStatement(SQL);
+			psmt.setString(1, user.getId());
+			psmt.setString(2, user.getPassword());
+			psmt.setString(3, user.getName());
+			psmt.setString(4, user.getGender());
+			psmt.setString(5, user.getBirth());
+			psmt.setString(6, user.getMail());
+			psmt.setString(7, user.getPhone());
+			psmt.setString(8, user.getAddress());
+			
+			result = psmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.err.println("회원 등록시 에러 발생...");
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 	
 	
@@ -26,20 +50,74 @@ public class UserRepository extends JDBConnection {
 	 * @return
 	 */
 	public User login(String id, String pw) {
+		User user = new User();
 		
+		String SQL = " SELECT * FROM "
+				   + " WHERE id = ? , password = ? "
+				   ;
+		
+		try {
+			psmt = con.prepareStatement(SQL);
+			psmt.setString(1, id);
+			psmt.setString(2, pw);
+			
+			rs = psmt.executeQuery();
+			if( rs.next() ) {
+				user.setId(id);
+				user.setName( rs.getString("name") );
+				user.setGender( rs.getString("gender") );
+				user.setBirth( rs.getString("birth") );
+				user.setMail( rs.getString("mail") );
+				user.setPhone( rs.getString("phone") );
+				user.setAddress( rs.getString("address") );
+				user.setRegistDay( rs.getString("regist_day") );
+			}
+			
+		} catch (Exception e) {
+			System.err.println("로그인 시도 중 에러발생...");
+			e.printStackTrace();
+		}
+		
+		return user;
 	}
 	
 	
 	
 	
 	/**
-	 * 로그인을 위한 사용자 조회
+	 * 아이디로 사용자 정보 조회
 	 * @param id
-	 * @param pw
 	 * @return
 	 */
 	public User getUserById(String id) {
+		User user = new User();
 		
+		String SQL = " SELECT * FROM "
+				   + " WHERE id = ? "
+				   ;
+		
+		try {
+			psmt = con.prepareStatement(SQL);
+			psmt.setString(1, id);
+			
+			rs = psmt.executeQuery();
+			if( rs.next() ) {
+				user.setId(id);
+				user.setName( rs.getString("name") );
+				user.setGender( rs.getString("gender") );
+				user.setBirth( rs.getString("birth") );
+				user.setMail( rs.getString("mail") );
+				user.setPhone( rs.getString("phone") );
+				user.setAddress( rs.getString("address") );
+				user.setRegistDay( rs.getString("regist_day") );
+			}
+			
+		} catch (Exception e) {
+			System.err.println("회원 정보 조회중 에러 발생...");
+			e.printStackTrace();
+		}
+		
+		return user;
 	}
 	
 	
@@ -49,7 +127,37 @@ public class UserRepository extends JDBConnection {
 	 * @return
 	 */
 	public int update(User user) {
+		int result = 0;
 		
+		String SQL = " UPDATE user SET "
+				   + " password "
+				   + " ,name "
+				   + " ,gender "
+				   + " ,birth "
+				   + " ,mail "
+				   + " ,phone "
+				   + " ,address "
+				   + " WHERE id = ? "
+				   ;
+		
+		try {
+			psmt = con.prepareStatement(SQL);
+			psmt.setString(1, user.getPassword());
+			psmt.setString(2, user.getName());
+			psmt.setString(3, user.getGender());
+			psmt.setString(4, user.getBirth());
+			psmt.setString(5, user.getMail());
+			psmt.setString(6, user.getPhone());
+			psmt.setString(7, user.getAddress());
+			psmt.setString(8, user.getId());
+			
+			
+		} catch (Exception e) {
+			System.err.println("회원 정보 수정 시 에러 발생...");
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 
@@ -59,7 +167,24 @@ public class UserRepository extends JDBConnection {
 	 * @return
 	 */
 	public int delete(String id) {
+		int result = 0;
 		
+		String SQL = " DELETE FROM user "
+				   + " WHERE id = ? "
+				   ;
+		
+		try {
+			psmt = con.prepareStatement(SQL);
+			psmt.setString(1, id);
+			
+			result = psmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.err.println("회원 삭제시 에러 발생...");
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 	
 	/**

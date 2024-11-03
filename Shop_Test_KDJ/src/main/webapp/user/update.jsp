@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Shop</title>
+	<title>Shop - 회원정보수정</title>
 	<jsp:include page="/layout/meta.jsp" /> <jsp:include page="/layout/link.jsp" />
 </head>
 <body>   
@@ -101,7 +101,7 @@
 					<div class="input-group mb-3 row">
 						<label class="input-group-text col-md-2" id="">아이디</label>
 						<input type="text" class="form-control col-md-10" 
-							   name="id" placeholder="아이디" required
+							   name="id" placeholder="아이디" readonly
 							   value="<%= loginUser.getId() %>">
 					</div>
 					

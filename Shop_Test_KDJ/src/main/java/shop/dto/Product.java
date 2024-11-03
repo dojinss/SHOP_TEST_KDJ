@@ -32,6 +32,7 @@ public class Product implements Serializable {
 	private String userId;			// 회원ID
 	private int orderNo;			// 주문번호
 	private String type;			// 입출고 타입
+	private int amoun;				// 입출고량
 	
 	public Product() {
 		
@@ -147,13 +148,20 @@ public class Product implements Serializable {
 		this.type = type;
 	}
 
+	public int getAmoun() {
+		return amoun;
+	}
+
+	public void setAmoun(int amoun) {
+		this.amoun = amoun;
+	}
+
 	@Override
 	public String toString() {
 		return "Product [productId=" + productId + ", name=" + name + ", unitPrice=" + unitPrice + ", description="
 				+ description + ", manufacturer=" + manufacturer + ", category=" + category + ", unitsInStock="
 				+ unitsInStock + ", condition=" + condition + ", file=" + file + ", quantity=" + quantity + ", userId="
-				+ userId + ", orderNo=" + orderNo + ", type=" + type + "]";
+				+ userId + ", orderNo=" + orderNo + ", type=" + type + ", amoun=" + amoun + "]";
 	}
 	
-
 }
