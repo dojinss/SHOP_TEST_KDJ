@@ -15,14 +15,21 @@
 </head>
 <body>   
 	<% 
+		OrderRepository orderDAO = new OrderRepository();
 		String root = request.getContextPath();
-	
-		// 주문 내역 목록을 세션에서 가져오기
+		List<Product> orderList = null;
 		
+		
+		// 주문 내역 목록을 세션에서 가져오기
+		String orderPhone = "";
+		int orderCount = 0;
 		// 회원인 경우
 		String loginId = (String) session.getAttribute("loginId");
 		boolean login = !loginId.equals("") && !loginId.isEmpty();
-		
+		if(login)		
+			orderList = orderDAO.list(loginId);
+		else
+			orderList = null;
 	%>
 	
 	<jsp:include page="/layout/header.jsp" />
@@ -152,51 +159,8 @@
 	</div>
 	
 	
-	
 	<jsp:include page="/layout/script.jsp" />
 	
-	
-
-	<script>
-		
-		let form = document.updateForm
-		
-		// 성별 선택
-		let tempGender = document.getElementById('temp-gender')
-		let radioFemale = document.getElementById('gender-female')
-		let radioMale = document.getElementById('gender-male')
-		// alert(tempGender.value)
-		if( tempGender.value == '남' )		radioMale.checked = true
-		if( tempGender.value == '여' )		radioFemale.checked = true
-		
-		
-		// 생일 월 (select) 선택
-		let tempMonth = document.getElementById('temp-month')
-		let selectMonth = form.month
-		selectMonth.value = tempMonth.value
-		
-		
-		// 메일 도메인 (select) 선택
-		let tempEmail2 = document.getElementById('temp-email2')
-		let selectEmail2 = form.email2
-		selectEmail2.value = tempEmail2.value
-		
-		
-		// 탈퇴 체크
-		function alertDel() {
-
-			let form = document.updateForm
-
-			let check = confirm('정말 탈퇴하시겠습니까?')
-
-			if( check ) {
-				form.action = 'delete.jsp'
-				form.submit()
-			}
-
-		}
-	
-	</script>
 </body>
 </html>
 

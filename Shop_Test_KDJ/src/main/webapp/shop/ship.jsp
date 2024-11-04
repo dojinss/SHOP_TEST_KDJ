@@ -16,7 +16,9 @@
 	<%
 		// root 설정
 		String root = request.getContextPath();
-	
+		
+		// cartId(주문번호) 받기 
+		String cartId = request.getParameter("cartId");
 		// 유저 DAO 생성
 		UserRepository userDAO = new UserRepository();
 		
@@ -31,9 +33,9 @@
 		String addr = "";
 		String phone = "";
 		if(loginUser != null) {
-			userName = loginUser.getName();
-			addr = loginUser.getAddress();
-			phone = loginUser.getPhone();
+			userName = loginUser.getName() != null ? loginUser.getName() : "";
+			addr = loginUser.getAddress() != null ? loginUser.getAddress() : "";
+			phone = loginUser.getPhone() != null ? loginUser.getPhone() : "";
 		}
 	%>
 	<jsp:include page="/layout/header.jsp" />
@@ -46,7 +48,7 @@
 	<div class="container shop mb-5 p-4">
 		<form action="ship_pro.jsp" class="form-horizontal" method="post">
 			<input type="hidden" name="cartId"
-				value="9B9F2F245A1038AADFCE63DFE7F75662">
+				value="<%=cartId%>">
 			<div class="input-group mb-3 row">
 				<label class="input-group-text col-md-2" id="">성명</label> <input
 					type="text" class="form-control col-md-10" name="name" value="<%=userName%>">
@@ -71,9 +73,14 @@
 			</div>
 			<div class="input-group mb-3 row">
 				<label class="input-group-text col-md-2" id="">전화번호</label> <input
-					type="text" class="form-control col-md-10" name="phone" value="<%=phone%>">
+					type="text" class="form-control col-md-10" name="phone" value="<%=phone%>" required>
 			</div>
-
+			<%if(loginUser == null) { %>
+			<div class="input-group mb-3 row">
+				<label class="input-group-text col-md-2" id="">비밀번호</label> <input
+					type="password" class="form-control col-md-10" name="pw" required>
+			</div>
+			<%} %>
 			<!-- 버튼 영역 -->
 			<div class="d-flex justify-content-between mt-5 mb-5">
 				<div class="item">

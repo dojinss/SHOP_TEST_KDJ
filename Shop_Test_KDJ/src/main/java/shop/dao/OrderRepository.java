@@ -110,7 +110,8 @@ public class OrderRepository extends JDBConnection {
 		try {
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(SQL);
-			result = rs.getInt("max_no");
+			if( rs.next() )
+				result = rs.getInt("max_no");
 			
 		} catch (Exception e) {
 			System.err.println("마지막주문번호 조회시 에러 발생...");
