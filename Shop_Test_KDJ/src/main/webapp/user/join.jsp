@@ -176,8 +176,8 @@
 			$("#join-form").submit(function(){
 				console.log("유효성 검사 시작...")
 				
-				const $id = $("input[name=id]")
-				const $pw = $("input[name=pw]")
+				const $id = $("input[name=id]") // = document.getElementByName("id") 
+				const $pw = $("input[name=pw]") // = document.getElementByName("pw")
 				const $pwConfirm = $("input[name=pw_confirm]")
 				const $name = $("input[name=name]")
 				// 아이디 검사

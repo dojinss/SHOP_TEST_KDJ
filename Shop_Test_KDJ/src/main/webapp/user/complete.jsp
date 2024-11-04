@@ -12,7 +12,7 @@
 		String root = request.getContextPath(); 	// root 경로 불러오기 
 		String msg = request.getParameter("msg");	// msg 전달값
 		String printMsg = "";						// 출력할 메세지
-		String userId = (String) session.getAttribute("userId"); // 로그인시 아이디값
+		String loginId = (String) session.getAttribute("loginId"); // 로그인시 아이디값
 		
 		
 		/*
@@ -23,7 +23,7 @@
 		- 3 : 회원 탈퇴
 		*/
 		switch(msg){
-			case "0" : printMsg = userId + "님 환영 합니다."; break; 
+			case "0" : printMsg = loginId + "님 환영 합니다."; break; 
 			case "1" : printMsg = "회원 가입이 완료되었습니다."; break; 
 			case "2" : printMsg = "회원 정보가 수정되었습니다."; break; 
 			case "3" : printMsg = "회원 정보가 삭제되었습니다."; break; 
@@ -36,7 +36,7 @@
 		
 	</div>
 	<!-- 회원 가입/수정/탈퇴 완료 -->
-	<div class="container mb-5">
+	<div class="container mb-5 d-flex-cols justify-content-center align-items-center">
 		<p class="display-5 text-body-emphasis"><%=printMsg %></p>
 		<a href="<%=root %>/" class="btn btn-primary">메인화면</a>
 	</div>

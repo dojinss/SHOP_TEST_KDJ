@@ -196,16 +196,16 @@ public class ProductRepository extends JDBConnection {
 		int result = 0;
 
 		String SQL = " UPDATE product SET " 
-				   + " name" 
-				   + " ,unit_price " 
-				   + " ,description " 
-				   + " ,manufacturer " 
-				   + " ,category " 
-				   + " ,units_in_stock "
-				   + " ,`condition` " 
-				   + " ,file " 
-				   + " ,quantity " 
-				   + " WHERE id = ? ";
+				   + " name = ? " 
+				   + " ,unit_price = ? " 
+				   + " ,description = ? " 
+				   + " ,manufacturer = ? " 
+				   + " ,category = ? " 
+				   + " ,units_in_stock = ?"
+				   + " ,`condition` = ? " 
+				   + " ,file = ? " 
+				   + " ,quantity = ? " 
+				   + " WHERE product_id = ? ";
 
 		try {
 			psmt = con.prepareStatement(SQL);
@@ -219,7 +219,8 @@ public class ProductRepository extends JDBConnection {
 			psmt.setString(8, product.getFile());
 			psmt.setInt(9, product.getQuantity());
 			psmt.setString(10, product.getProductId());
-
+			
+			result = psmt.executeUpdate();
 		} catch (Exception e) {
 			System.err.println("상품 정보 수정 시 에러 발생...");
 			e.printStackTrace();

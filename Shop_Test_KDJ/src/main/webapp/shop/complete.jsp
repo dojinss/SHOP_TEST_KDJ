@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Shop</title>
+	<title>Shop - 상품정보</title>
 	<jsp:include page="/layout/meta.jsp" /> <jsp:include page="/layout/link.jsp" />
 </head>
 <body>   
@@ -12,7 +12,6 @@
 		String root = request.getContextPath(); 	// root 경로 불러오기 
 		String msg = request.getParameter("msg");	// msg 전달값
 		String printMsg = "";						// 출력할 메세지
-		String userId = (String) session.getAttribute("userId"); // 로그인시 아이디값
 		
 		
 		/*
@@ -23,22 +22,24 @@
 		- 3 : 
 		*/
 		switch(msg){
-			case "0" : printMsg = userId + "님 환영 합니다."; break; 
-			case "1" : printMsg = "회원 가입이 완료되었습니다."; break; 
-			case "2" : printMsg = "회원 정보가 수정되었습니다."; break; 
-			case "3" : printMsg = "회원 정보가 삭제되었습니다."; break; 
+			case "0" : printMsg = "상품 등록이 완료 되었습니다."; break; 
+// 			case "1" : printMsg = "상품 등록이 완료 되었습니다."; break; 
+			case "2" : printMsg = "상품 정보가 수정 되었습니다."; break; 
+			case "3" : printMsg = "상품 정보가 삭제 되었습니다."; break; 
 		}
 	%>
 	
 	<jsp:include page="/layout/header.jsp" />
 	<div class="px-4 py-5 my-5 text-center">
-		<h1 class="display-5 fw-bold text-body-emphasis">회원 정보</h1>
-		
+		<h1 class="display-5 fw-bold text-body-emphasis">상품 정보</h1>
 	</div>
-	<!-- 회원 가입/수정/탈퇴 완료 -->
-	<div class="container mb-5">
-		<p class="display-5 text-body-emphasis"><%=printMsg %></p>
-		<a href="<%=root %>/" class="btn btn-primary">메인화면</a>
+	<div class="mb-5 row">
+		<div class="col-12 text-center">
+			<p class="display-5 text-body-emphasis text-center"><%=printMsg %></p>
+		</div>
+		<div class="col-12 text-center">
+			<a href="<%=root %>/shop/products.jsp" class="btn btn-primary">상품 목록</a>
+		</div>
 	</div>
 	<jsp:include page="/layout/footer.jsp" />
 	<jsp:include page="/layout/script.jsp" />

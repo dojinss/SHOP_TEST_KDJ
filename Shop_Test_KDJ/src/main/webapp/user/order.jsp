@@ -15,12 +15,13 @@
 </head>
 <body>   
 	<% 
-
+		String root = request.getContextPath();
 	
 		// 주문 내역 목록을 세션에서 가져오기
 		
 		// 회원인 경우
-		
+		String loginId = (String) session.getAttribute("loginId");
+		boolean login = !loginId.equals("") && !loginId.isEmpty();
 		
 	%>
 	

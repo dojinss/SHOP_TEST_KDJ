@@ -57,7 +57,7 @@
 					<a href="<%=root%>/shop/update.jsp?id=<%=product.getProductId()%>"
 						class="btn btn-primary d-flex align-items-center">수정</a>
 					<a href="<%=root%>/shop/delete_pro.jsp?id=<%=product.getProductId()%>"
-						class="d-flex btn btn-danger align-items-center">삭제</a>				
+						class="d-flex btn btn-danger align-items-center del-product-btn">삭제</a>				
 				</div>
 			</div>
 		</div>
@@ -68,6 +68,13 @@
 	</div>
 	<jsp:include page="/layout/footer.jsp" />
 	<jsp:include page="/layout/script.jsp" />
+	<script type="text/javascript">
+		$(function(){
+			$(".del-product-btn").click(function() {
+				return confirm("해당 제품을 삭제 하시겠습니까?")
+			})
+		})
+	</script>
 </body>
 </html>
 

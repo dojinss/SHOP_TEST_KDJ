@@ -28,7 +28,7 @@
 	
 	<!-- 상품 등록 영역 -->
 	<div class="container shop p-5 mb-5" >
-		<form action="add_pro.jsp" name="joinForm" method="post" id="add-form" onsubmit="checkProduct();">
+		<form action="add_pro.jsp" name="product" method="post" enctype="multipart/form-data" onsubmit="javascript:return checkProduct();">
 		
 			<div class="input-group mb-3 row">
 				<label class="input-group-text col-md-4" id="">상품 이미지</label>
@@ -39,13 +39,19 @@
 			<div class="input-group mb-3 row">
 				<label class="input-group-text col-md-4" id="">상품코드</label>
 				<input type="text" class="form-control col-md-8" 
-					   name="product-id" placeholder="상품코드" required>
+					   name="productId" placeholder="상품코드" required>
 			</div>
 			
 			<div class="input-group mb-3 row">
 				<label class="input-group-text col-md-4" id="">상품명</label>
 				<input type="text" class="form-control col-md-8" 
-					   name="name" placeholder="비밀번호 확인" required>
+					   name="name" placeholder="상품명" required>
+			</div>
+			
+			<div class="input-group mb-3 row">
+				<label class="input-group-text col-md-4" id="">가격</label>
+				<input type="text" class="form-control col-md-8" 
+					   name="unitPrice" placeholder="가격" required>
 			</div>
 			
 			<div class="input-group mb-3 row">
@@ -68,15 +74,23 @@
 			<div class="input-group mb-3 row">
 				<label class="input-group-text col-md-4" id="">재고수</label>
 				<input type="text" class="form-control col-md-8" 
-					   name="stock" placeholder="재고수" required>
+					   name="unitsInStock" placeholder="재고수" required>
 			</div>
 			
 			<div class="input-group mb-3 row">
-				<label class="input-group-text col-md-4" id="">재고수</label>
-				<div>
-					<div>
-						<input type="radio" name="condition" value="new"/>
-						<label>신규제품</label>
+				<label class="input-group-text col-md-4" id="">상태</label>
+				<div class="row col-md-8">
+					<div class="col d-flex align-items-center gap-2">
+						<input id="new-pro" type="radio" name="condition" value="신규" required/>
+						<label for="new-pro">신규제품</label>
+					</div>
+					<div class="col d-flex align-items-center gap-2">
+						<input id="old-pro" type="radio" name="condition" value="중고" required/>
+						<label for="old-pro">중고제품</label>
+					</div>
+					<div class="col d-flex align-items-center gap-2">
+						<input id="re-pro" type="radio" name="condition" value="재생" required/>
+						<label for="re-pro">재생제품</label>
 					</div>
 				</div>
 			</div>

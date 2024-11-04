@@ -1,6 +1,7 @@
 package shop.dto;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 /**
  * Product 자바빈즈
@@ -32,7 +33,8 @@ public class Product implements Serializable {
 	private String userId;			// 회원ID
 	private int orderNo;			// 주문번호
 	private String type;			// 입출고 타입
-	private int amoun;				// 입출고량
+	private int amount;				// 입출고량
+	private Date ioDate;			// 입출고량
 	
 	public Product() {
 		
@@ -148,12 +150,20 @@ public class Product implements Serializable {
 		this.type = type;
 	}
 
-	public int getAmoun() {
-		return amoun;
+	public int getAmount() {
+		return amount;
 	}
 
-	public void setAmoun(int amoun) {
-		this.amoun = amoun;
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+
+	public Date getIoDate() {
+		return ioDate;
+	}
+
+	public void setIoDate(Date ioDate) {
+		this.ioDate = ioDate;
 	}
 
 	@Override
@@ -161,7 +171,8 @@ public class Product implements Serializable {
 		return "Product [productId=" + productId + ", name=" + name + ", unitPrice=" + unitPrice + ", description="
 				+ description + ", manufacturer=" + manufacturer + ", category=" + category + ", unitsInStock="
 				+ unitsInStock + ", condition=" + condition + ", file=" + file + ", quantity=" + quantity + ", userId="
-				+ userId + ", orderNo=" + orderNo + ", type=" + type + ", amoun=" + amoun + "]";
+				+ userId + ", orderNo=" + orderNo + ", type=" + type + ", amount=" + amount + ", ioDate=" + ioDate
+				+ "]";
 	}
-	
+
 }

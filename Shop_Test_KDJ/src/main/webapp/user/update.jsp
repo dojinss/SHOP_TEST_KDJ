@@ -121,12 +121,14 @@
 								   id="temp-gender" />
 							<div class="radio-box d-flex">
 								<div class="radio-item mx-5">
-									<input type="radio" class="form-check-input" name="gender" value="여" id="gender-female"> 
+									<input type="radio" class="form-check-input" name="gender" 
+										value="여" id="gender-female" <%= loginUser.getGender() == "여"?"checked":"" %>> 
 									<label for="gender-female">여자</label>
 								</div>
 								
 								<div class="radio-item mx-5">
-									<input type="radio" class="form-check-input " name="gender" value="남" id="gender-male"> 
+									<input type="radio" class="form-check-input " name="gender" 
+										value="남" id="gender-male" <%= loginUser.getGender() == "남"?"checked":"" %>> 
 									<label for="gender-male">남자</label>
 								</div>
 								

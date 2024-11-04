@@ -1,3 +1,9 @@
+//$(function(){
+//	$("#add-btn").click(function(){
+//		return checkProduct();
+//	})
+//})
+
 /**
  *  유효성 검사 
  */
