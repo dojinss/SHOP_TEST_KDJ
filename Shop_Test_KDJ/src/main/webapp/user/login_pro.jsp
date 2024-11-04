@@ -27,7 +27,7 @@
 	session.setAttribute("loginUser", loginUser);
 	// 아이디 저장
 	Cookie cookieRememberId = new Cookie("rememberId","");
-	Cookie cookieUserid		= new Cookie("userId","");
+	Cookie cookieUserid		= new Cookie("loginId","");
 	if( rememberId != null && rememberId.equals("on")){
 		cookieRememberId.setValue( URLEncoder.encode(rememberId, "UTF-8") );
 		cookieUserid.setValue( URLEncoder.encode(id, "UTF-8") );

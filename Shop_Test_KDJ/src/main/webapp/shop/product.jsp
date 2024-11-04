@@ -81,7 +81,7 @@
 			<!-- 버튼 모음 -->
 			<a href="<%=root%>/shop/cart_pro.jsp?id=<%=product.getProductId()%>"
 				class="btn btn-warning d-flex align-items-center">장바구니</a> <a
-				href="<%=root%>/shop/product.jsp?id=<%=product.getProductId()%>"
+				href="<%=root%>/shop/addCart.jsp?id=<%=product.getProductId()%>"
 				class="d-flex btn btn-success align-items-center">주문하기</a>
 		</div>
 	</div>
